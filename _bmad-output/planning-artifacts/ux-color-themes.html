@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L4rs0n - UX Color Themes</title>
+    <style>
+      :root {
+        --bg: #f2efe7;
+        --ink: #14212b;
+        --muted: #5f6c76;
+        --line: rgba(20, 33, 43, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Source Sans 3", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(31, 138, 112, 0.14), transparent 28%),
+          radial-gradient(circle at top right, rgba(18, 59, 93, 0.16), transparent 24%),
+          linear-gradient(180deg, #faf8f2 0%, #f2efe7 100%);
+      }
+      header {
+        padding: 56px 24px 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1, h2, h3 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        margin: 0;
+        line-height: 1;
+        letter-spacing: 0.02em;
+      }
+      h1 { font-size: clamp(3rem, 7vw, 5.5rem); }
+      .intro {
+        max-width: 760px;
+        font-size: 1.12rem;
+        line-height: 1.6;
+        color: var(--muted);
+        margin-top: 14px;
+      }
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px 56px;
+        display: grid;
+        gap: 24px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+      .summary-card, .theme {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+      }
+      .summary-card { padding: 18px; }
+      .summary-card strong {
+        display: block;
+        font-size: 1.7rem;
+        margin-bottom: 6px;
+      }
+      .themes { display: grid; gap: 20px; }
+      .theme { overflow: hidden; }
+      .theme-grid {
+        display: grid;
+        grid-template-columns: minmax(260px, 340px) 1fr;
+      }
+      .theme-sidebar {
+        padding: 24px;
+        color: #fff;
+      }
+      .theme-content {
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.78);
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.18);
+        margin-bottom: 18px;
+      }
+      .theme-sidebar p, .theme-content p, li { line-height: 1.5; }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin: 18px 0 0;
+      }
+      .swatch {
+        border-radius: 16px;
+        min-height: 84px;
+        padding: 10px;
+        font-size: 0.78rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+      }
+      .preview-shell {
+        border-radius: 20px;
+        padding: 20px;
+        border: 1px solid rgba(20, 33, 43, 0.08);
+      }
+      .preview-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .mini-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+      .preview-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 16px;
+      }
+      .panel {
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid rgba(20, 33, 43, 0.08);
+      }
+      .activity { display: grid; gap: 10px; }
+      .activity-card {
+        border-radius: 16px;
+        padding: 14px;
+        border: 1px solid rgba(20, 33, 43, 0.1);
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .activity-meta { color: #667480; font-size: 0.92rem; }
+      .cta {
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-weight: 700;
+      }
+      .checklist {
+        padding-left: 18px;
+        margin: 12px 0 0;
+      }
+      footer {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px 48px;
+        color: var(--muted);
+      }
+      @media (max-width: 900px) {
+        .theme-grid, .preview-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Couleurs UX L4rs0n</h1>
+      <p class="intro">
+        Exploration de thèmes pour une application de club sportif amateur.
+        Chaque piste conserve la même structure UX, mais modifie la tonalité
+        émotionnelle et la perception de fiabilité, d'énergie et de proximité.
+      </p>
+    </header>
+    <main>
+      <section class="summary">
+        <article class="summary-card"><strong>4</strong>thèmes exploitables</article>
+        <article class="summary-card"><strong>AA</strong>contraste visé sur les parcours critiques</article>
+        <article class="summary-card"><strong>2</strong>surfaces principales à servir : adhérent et responsable</article>
+        <article class="summary-card"><strong>1</strong>recommandation finale : Base Club Active</article>
+      </section>
+
+      <section class="themes">
+        <article class="theme">
+          <div class="theme-grid">
+            <div class="theme-sidebar" style="background: linear-gradient(180deg, #123b5d 0%, #0b2740 100%)">
+              <span class="eyebrow">Recommandé</span>
+              <h2>Base Club Active</h2>
+              <p>
+                Un équilibre entre sérieux administratif et énergie sportive.
+                Cette piste donne confiance aux responsables sans refroidir
+                l'expérience des adhérents.
+              </p>
+              <div class="swatches">
+                <div class="swatch" style="background:#123b5d;">Primary<br />#123B5D</div>
+                <div class="swatch" style="background:#1f8a70;">Accent<br />#1F8A70</div>
+                <div class="swatch" style="background:#f6f4ee;color:#15212b;">Surface<br />#F6F4EE</div>
+                <div class="swatch" style="background:#d97706;">Warning<br />#D97706</div>
+                <div class="swatch" style="background:#c0392b;">Danger<br />#C0392B</div>
+              </div>
+            </div>
+            <div class="theme-content">
+              <p>
+                Idéal si l'objectif principal est la lisibilité et la fiabilité
+                opérationnelle. Convient particulièrement bien au duo
+                back-office desktop / parcours mobile.
+              </p>
+              <div class="preview-shell" style="background:#f6f4ee;">
+                <div class="preview-top">
+                  <h3>Vue adhérent</h3>
+                  <span class="mini-badge" style="background:#d9eee7;color:#155743;">Eligible</span>
+                </div>
+                <div class="preview-grid">
+                  <div class="panel" style="background:#fff;">
+                    <div class="activity">
+                      <div class="activity-card" style="background:#fff;">
+                        <div>
+                          <strong>Entrainement loisirs</strong>
+                          <div class="activity-meta">Jeudi 19:30 · Gymnase Nord</div>
+                        </div>
+                        <button class="cta" style="background:#123b5d;color:#fff;">S'inscrire</button>
+                      </div>
+                      <div class="activity-card" style="background:#eef5fb;">
+                        <div>
+                          <strong>Tournoi interne</strong>
+                          <div class="activity-meta">Samedi 14:00 · 18 places restantes</div>
+                        </div>
+                        <span class="mini-badge" style="background:#e8edf2;color:#123b5d;">Suivi</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel" style="background:#fff;">
+                    <strong>Pourquoi ce thème</strong>
+                    <ul class="checklist">
+                      <li>Structure solide pour l'administration</li>
+                      <li>Accent vert utile pour la réussite et la disponibilité</li>
+                      <li>Fond sable moins froid qu'un gris neutre</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="theme">
+          <div class="theme-grid">
+            <div class="theme-sidebar" style="background: linear-gradient(180deg, #284b63 0%, #1c3243 100%)">
+              <span class="eyebrow">Option</span>
+              <h2>Carnet de Club</h2>
+              <p>
+                Direction plus chaleureuse, presque éditoriale. Elle favorise
+                le sentiment d'appartenance et les contenus de vie de club.
+              </p>
+              <div class="swatches">
+                <div class="swatch" style="background:#284b63;">Primary<br />#284B63</div>
+                <div class="swatch" style="background:#d9bf77;color:#15212b;">Accent<br />#D9BF77</div>
+                <div class="swatch" style="background:#f3ede2;color:#15212b;">Surface<br />#F3EDE2</div>
+                <div class="swatch" style="background:#7a9e7e;">Success<br />#7A9E7E</div>
+                <div class="swatch" style="background:#bc4749;">Danger<br />#BC4749</div>
+              </div>
+            </div>
+            <div class="theme-content">
+              <p>
+                Intéressant si les annonces, la vie associative et la
+                convivialité doivent être plus visibles dès l'accueil.
+              </p>
+              <div class="preview-shell" style="background:#f3ede2;">
+                <div class="preview-top">
+                  <h3>Accueil club</h3>
+                  <span class="mini-badge" style="background:#fff1cf;color:#765a00;">Info importante</span>
+                </div>
+                <div class="preview-grid">
+                  <div class="panel" style="background:#fffdf9;">
+                    <strong>Annonce de la semaine</strong>
+                    <p>Changement de créneau vendredi. Nouvel horaire publié pour tous les adhérents.</p>
+                  </div>
+                  <div class="panel" style="background:#fffdf9;">
+                    <strong>Qualités</strong>
+                    <ul class="checklist">
+                      <li>Ton plus humain</li>
+                      <li>Très bon pour documents et annonces</li>
+                      <li>Moins net pour les vues denses</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="theme">
+          <div class="theme-grid">
+            <div class="theme-sidebar" style="background: linear-gradient(180deg, #0f172a 0%, #111827 100%)">
+              <span class="eyebrow">Option</span>
+              <h2>Cockpit Nuit</h2>
+              <p>
+                Une piste plus technique et contrastée, utile pour les vues de
+                pilotage, mais plus risquée pour un public associatif large.
+              </p>
+              <div class="swatches">
+                <div class="swatch" style="background:#0f172a;">Primary<br />#0F172A</div>
+                <div class="swatch" style="background:#38bdf8;color:#082032;">Accent<br />#38BDF8</div>
+                <div class="swatch" style="background:#1f2937;">Surface<br />#1F2937</div>
+                <div class="swatch" style="background:#22c55e;color:#082032;">Success<br />#22C55E</div>
+                <div class="swatch" style="background:#f97316;">Alert<br />#F97316</div>
+              </div>
+            </div>
+            <div class="theme-content">
+              <p>
+                Convient pour des dashboards de contrôle, mais peut paraître
+                trop "outil interne" si utilisé comme direction principale.
+              </p>
+              <div class="preview-shell" style="background:#111827;color:#f8fafc;">
+                <div class="preview-top">
+                  <h3>Vue responsable</h3>
+                  <span class="mini-badge" style="background:#1e293b;color:#93c5fd;">2 conflits</span>
+                </div>
+                <div class="preview-grid">
+                  <div class="panel" style="background:#1f2937;color:#f8fafc;">
+                    <strong>Créneaux du soir</strong>
+                    <p>Jeu. 19:30 · Gymnase Nord · Conflit détecté sur le terrain 2</p>
+                  </div>
+                  <div class="panel" style="background:#1f2937;color:#f8fafc;">
+                    <strong>Qualités</strong>
+                    <ul class="checklist">
+                      <li>Très fort pour les alertes</li>
+                      <li>Bonne densité desktop</li>
+                      <li>Moins accueillant côté adhérent</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="theme">
+          <div class="theme-grid">
+            <div class="theme-sidebar" style="background: linear-gradient(180deg, #2d6a4f 0%, #1b4332 100%)">
+              <span class="eyebrow">Option</span>
+              <h2>Terrain Vivant</h2>
+              <p>
+                Une variante plus énergique et plus sportive, avec un accent
+                vert très présent. Elle crée de l'élan mais demande de la
+                discipline pour ne pas saturer les écrans.
+              </p>
+              <div class="swatches">
+                <div class="swatch" style="background:#2d6a4f;">Primary<br />#2D6A4F</div>
+                <div class="swatch" style="background:#f4d35e;color:#15212b;">Accent<br />#F4D35E</div>
+                <div class="swatch" style="background:#f1faee;color:#15212b;">Surface<br />#F1FAEE</div>
+                <div class="swatch" style="background:#40916c;">Success<br />#40916C</div>
+                <div class="swatch" style="background:#bc4749;">Danger<br />#BC4749</div>
+              </div>
+            </div>
+            <div class="theme-content">
+              <p>
+                Plus expressif, plus chaleureux, mais à réserver si l'on veut
+                donner davantage de place à l'énergie club qu'à la gestion.
+              </p>
+              <div class="preview-shell" style="background:#f1faee;">
+                <div class="preview-top">
+                  <h3>Mur d'activités</h3>
+                  <span class="mini-badge" style="background:#daf0e4;color:#20523f;">3 inscriptions validées</span>
+                </div>
+                <div class="preview-grid">
+                  <div class="panel" style="background:#fff;">
+                    <strong>Stage jeunes</strong>
+                    <p>Samedi 09:00 · 12 inscrits · Documents complets</p>
+                  </div>
+                  <div class="panel" style="background:#fff;">
+                    <strong>Qualités</strong>
+                    <ul class="checklist">
+                      <li>Présence sportive assumée</li>
+                      <li>Très lisible sur mobile</li>
+                      <li>Risque de sur-usage du vert</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer>
+      Recommandation finale : partir de <strong>Base Club Active</strong>, puis
+      doser la chaleur éditoriale de <strong>Carnet de Club</strong> dans les
+      espaces d'annonce et d'information.
+    </footer>
+  </body>
+</html>
