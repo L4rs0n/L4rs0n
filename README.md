@@ -20,6 +20,7 @@ Socle applicatif de L4rs0n, une application web de gestion pour club sportif ama
 ## Commandes utiles
 
 - `npm run lint`
+- `npm run test`
 - `npm run typecheck`
 - `npm run build`
 - `npm run prisma:generate`
@@ -51,3 +52,5 @@ prisma/         # schéma Prisma et migrations
 
 - La story 1.1 prépare le terrain, elle n'implémente pas encore les workflows métier.
 - Les décisions d'autorisation, d'éligibilité, d'audit et de visibilité doivent rester dans les services et policies de domaine, pas dans les composants UI.
+- La story 1.2 branche Better Auth pour la connexion email / mot de passe, la restauration de session et le reset password.
+- En environnement local sans fournisseur email réel, les URLs de reset password sont journalisées côté serveur pour faciliter le test manuel du flux.

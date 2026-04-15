@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src prisma.config.ts next.config.ts",
+    "test": "node --test --test-isolation=none --experimental-strip-types --experimental-transform-types \"src/**/*.spec.ts\"",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate"
