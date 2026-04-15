@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f4ee;
+  --foreground: #15212b;
+  --surface: #fffdf8;
+  --surface-contrast: #e8edf2;
+  --primary: #123b5d;
+  --primary-strong: #0b2740;
+  --accent: #1f8a70;
+  --accent-soft: #d9eee7;
+  --success: #1f8a52;
+  --warning: #d97706;
+  --danger: #c0392b;
+  --info: #2563eb;
+  --muted: #52606d;
+  --border: rgba(18, 59, 93, 0.14);
+  --shadow-soft: 0 24px 60px rgba(11, 39, 64, 0.08);
+  --radius-card: 1.125rem;
+  --radius-panel: 1.5rem;
+  --font-heading-family: "Barlow Condensed", "Arial Narrow", "Roboto Condensed",
+    sans-serif;
+  --font-body-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-code-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-contrast: var(--surface-contrast);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-body-family);
+  --font-mono: var(--font-code-family);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top, rgba(31, 138, 112, 0.12), transparent 32%),
+    linear-gradient(180deg, #fbfaf6 0%, #f1efe7 100%);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body-family);
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  outline-color: var(--accent);
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading-family);
+  letter-spacing: 0.01em;
+}
+
+code,
+pre {
+  font-family: var(--font-code-family);
+}
+
+::selection {
+  background: rgba(31, 138, 112, 0.24);
+}
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(31, 138, 112, 0.1), transparent 26%),
+    radial-gradient(circle at 90% 0%, rgba(18, 59, 93, 0.08), transparent 28%);
+}
+
+.surface-card {
+  background: rgba(255, 253, 248, 0.92);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+}

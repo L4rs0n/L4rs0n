@@ -1,0 +1,90 @@
+# generated: 2026-04-14T21:57:04.8998298+02:00
+# last_updated: 2026-04-14T21:57:04.8998298+02:00
+# project: L4rs0n
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-04-14T21:57:04.8998298+02:00
+last_updated: 2026-04-15T09:54:42.3075761+02:00
+project: L4rs0n
+project_key: NOKEY
+tracking_system: file-system
+story_location: "_bmad-output/implementation-artifacts"
+
+development_status:
+  epic-1: in-progress
+  1-1-initialiser-le-socle-applicatif-du-club: review
+  1-2-authentifier-un-utilisateur-par-email-et-mot-de-passe: backlog
+  1-3-creer-un-compte-via-invitation-ou-rattachement-valide: backlog
+  1-4-appliquer-les-roles-et-afficher-une-surface-adaptee: backlog
+  1-5-gerer-le-cycle-de-vie-administratif-dun-compte: backlog
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-creer-modifier-et-archiver-une-fiche-membre: backlog
+  2-2-lister-les-membres-et-relier-une-fiche-a-un-utilisateur: backlog
+  2-3-gerer-cotisation-statut-et-eligibilite: backlog
+  2-4-gerer-les-documents-obligatoires-et-la-conformite-membre: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-creer-un-brouillon-devenement: backlog
+  3-2-publier-modifier-reporter-ou-annuler-un-evenement: backlog
+  3-3-consulter-une-activite-et-sa-situation-personnelle: backlog
+  3-4-sinscrire-se-desinscrire-et-suivre-les-participants: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-creer-et-mettre-a-jour-une-rencontre-inter-clubs: backlog
+  4-2-gerer-les-participants-concernes-et-leur-consultation: backlog
+  epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-creer-et-republier-un-creneau-de-gymnase: backlog
+  5-2-detecter-les-conflits-et-visualiser-le-planning: backlog
+  5-3-publier-les-creneaux-aux-adherents-et-notifier-les-changements: backlog
+  epic-5-retrospective: optional
+
+  epic-6: backlog
+  6-1-publier-un-document-club-dans-lespace-partage: backlog
+  6-2-creer-des-canaux-dinformation-et-publier-des-annonces-ciblees: backlog
+  6-3-consulter-annonces-et-documents-utiles-cote-adherent: backlog
+  epic-6-retrospective: optional
+
+  epic-7: backlog
+  7-1-afficher-un-tableau-de-bord-admin-et-gerer-les-parametres-du-club: backlog
+  7-2-consulter-le-journal-daudit-des-actions-sensibles: backlog
+  7-3-gerer-confidentialite-consentements-et-suppression-de-donnees: backlog
+  7-4-mettre-en-place-lobservabilite-operationnelle-du-mvp: backlog
+  7-5-securiser-sauvegarde-et-restauration-des-donnees-metier: backlog
+  epic-7-retrospective: optional

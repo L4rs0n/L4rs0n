@@ -16,7 +16,7 @@ inputDocuments:
 workflowType: "architecture"
 lastStep: 8
 status: "complete"
-completedAt: "2026-04-08T21:27:06.9055098+02:00"
+completedAt: "2026-04-14T00:00:00+02:00"
 project_name: "L4rs0n"
 user_name: "LUTCHANAH Kévin"
 date: "2026-04-08T20:34:14.1245963+02:00"
@@ -791,6 +791,21 @@ En complément des conventions générales :
 - fichiers `actions.ts` proches de la route ou de la feature concernée ;
 - pas de dossier `utils` fourre-tout par domaine ;
 - documentation d’architecture et ADR conservées dans `docs` ou artefacts BMAD, pas dispersées dans `src`.
+
+### Frontend Implementation Conventions
+
+- les primitives UI accessibles retenues pour le MVP s’appuient sur `shadcn/ui` avec `Radix UI` lorsque pertinent, afin de limiter les divergences d’implémentation sur accessibilité, focus et overlays ;
+- les polices `Barlow Condensed`, `Source Sans 3` et `IBM Plex Mono` sont chargées via `next/font` et exposées via des tokens ou variables CSS partagées ;
+- les premiers composants métier frontend à traiter comme références du design system produit sont :
+  - `Badge d’éligibilité` ;
+  - `Panneau conformité membre` ;
+  - `Carte activité` ;
+  - `Timeline de créneaux` ;
+  - `Panneau participants / convocations` ;
+  - `Rail annonces et infos club` ;
+- les surfaces `(member)` et `(admin)` suivent des conventions de navigation distinctes : mobile-first orienté action rapide côté adhérent, sidebar et vues denses côté administration, breadcrumb limité aux parcours administratifs profonds ;
+- tout composant métier critique doit définir explicitement ses états `empty`, `loading`, `error` et `success` ;
+- les patterns de feedback frontend sont normalisés : succès par `toast` plus état persistant, erreurs inline près du problème avec résumé si nécessaire, warning en bannière contextuelle.
 
 ### Format Patterns
 
