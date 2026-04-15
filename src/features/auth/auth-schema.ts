@@ -15,6 +15,43 @@ export const forgotPasswordSchema = z.object({
   email: z.email("Saisissez une adresse email valide."),
 });
 
+export const registrationTokenSchema = z
+  .string()
+  .trim()
+  .min(1, "Le lien d'inscription est incomplet.")
+  .regex(
+    /^[a-f0-9]{32,128}$/i,
+    "Le lien d'inscription est invalide ou incomplete.",
+  );
+
+export const registerSchema = z
+  .object({
+    token: registrationTokenSchema,
+    email: z.email("Saisissez une adresse email valide."),
+    name: z
+      .string()
+      .trim()
+      .min(2, "Indiquez votre nom complet.")
+      .max(120, "Le nom saisi est trop long."),
+    password: z
+      .string()
+      .min(
+        AUTH_PASSWORD_MIN_LENGTH,
+        `Le mot de passe doit contenir au moins ${AUTH_PASSWORD_MIN_LENGTH} caracteres.`,
+      )
+      .max(
+        AUTH_PASSWORD_MAX_LENGTH,
+        `Le mot de passe doit contenir au maximum ${AUTH_PASSWORD_MAX_LENGTH} caracteres.`,
+      ),
+    confirmPassword: z
+      .string()
+      .min(1, "Confirmez votre mot de passe."),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Les mots de passe ne correspondent pas.",
+    path: ["confirmPassword"],
+  });
+
 export const resetPasswordSchema = z
   .object({
     token: z.string().min(1, "Le lien de reinitialisation est incomplet."),

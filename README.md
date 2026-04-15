@@ -14,8 +14,11 @@ Socle applicatif de L4rs0n, une application web de gestion pour club sportif ama
 
 1. Installer les dépendances avec `npm install`
 2. Copier `.env.example` vers `.env.local`
-3. Générer le client Prisma avec `npm run prisma:generate`
-4. Lancer l'application avec `npm run dev`
+3. Remplacer `BETTER_AUTH_SECRET` par une vraie valeur secrète d'au moins 32 caractères
+4. Générer le client Prisma avec `npm run prisma:generate`
+5. Lancer l'application avec `npm run dev`
+
+Les commandes Next.js et Prisma lisent le même jeu de variables d'environnement. Gardez donc `DATABASE_URL` dans `.env.local` pour éviter des écarts entre l'application et les commandes CLI.
 
 ## Commandes utiles
 
@@ -54,3 +57,5 @@ prisma/         # schéma Prisma et migrations
 - Les décisions d'autorisation, d'éligibilité, d'audit et de visibilité doivent rester dans les services et policies de domaine, pas dans les composants UI.
 - La story 1.2 branche Better Auth pour la connexion email / mot de passe, la restauration de session et le reset password.
 - En environnement local sans fournisseur email réel, les URLs de reset password sont journalisées côté serveur pour faciliter le test manuel du flux.
+- La story 1.3 ajoute `/register`, mais ce parcours ne fonctionne que si une `Member` et une `RegistrationGrant` valides existent deja cote club.
+- Tant que l'UI d'administration correspondante n'existe pas encore, ces enregistrements peuvent etre prepares via Prisma Studio, SQL ou un seed interne de developpement.

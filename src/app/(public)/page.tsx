@@ -7,43 +7,43 @@ const foundationBlocks = [
   {
     title: "Socle App Router",
     description:
-      "Next.js App Router, TypeScript, Tailwind CSS et séparation claire des surfaces d'expérience.",
+      "Next.js App Router, TypeScript, Tailwind CSS et separation claire des surfaces d'experience.",
   },
   {
-    title: "Frontières métier",
+    title: "Frontieres metier",
     description:
-      "Les domaines prioritaires du MVP sont préparés sous `src/features` pour éviter la logique dispersée.",
+      "Les domaines prioritaires du MVP sont prepares sous `src/features` pour eviter la logique dispersee.",
   },
   {
-    title: "Fondation qualité",
+    title: "Fondation qualite",
     description:
-      "Le dépôt est prêt à porter lint, typecheck, build et un pipeline CI minimal dès la première story.",
+      "Le depot est pret a porter lint, typecheck, build et un pipeline CI minimal des la premiere story.",
   },
 ];
 
 const navigationCards = [
   {
     href: "/espace",
-    eyebrow: "Surface adhérent",
-    title: "Préparer les parcours mobiles",
+    eyebrow: "Surface adherent",
+    title: "Preparer les parcours mobiles",
     description:
-      "Zone de référence pour les futures pages de consultation, d'éligibilité et d'inscription.",
+      "Zone de reference pour les futures pages de consultation, d'eligibilite et d'inscription.",
   },
   {
     href: "/pilotage",
     eyebrow: "Surface responsable",
-    title: "Préparer le pilotage du club",
+    title: "Preparer le pilotage du club",
     description:
-      "Zone de départ pour les futures vues d'administration, de conformité et d'exploitation.",
+      "Zone de depart pour les futures vues d'administration, de conformite et d'exploitation.",
   },
 ];
 
-export default function HomePage() {
+export default function PublicHomePage() {
   return (
     <PageShell
       eyebrow="Story 1.1"
-      title="Initialiser un socle robuste avant d'attaquer le métier"
-      description="Cette page confirme que l'application démarre sur un socle server-first, lisible et prêt à accueillir les domaines prioritaires de L4rs0n."
+      title="Initialiser un socle robuste avant d'attaquer le metier"
+      description="Cette page confirme que l'application demarre sur un socle server-first, lisible et pret a accueillir les domaines prioritaires de L4rs0n."
     >
       <section className="grid gap-5 lg:grid-cols-[1.3fr_0.9fr]">
         <article className="surface-card rounded-[var(--radius-panel)] p-6 sm:p-8">
@@ -52,12 +52,12 @@ export default function HomePage() {
               Mono-club, mobile-first, server-first
             </span>
             <h2 className="text-3xl leading-none text-primary-strong sm:text-4xl">
-              Une base sobre, mais déjà orientée livraison
+              Une base sobre, mais deja orientee livraison
             </h2>
             <p className="max-w-2xl text-lg leading-8 text-muted">
-              Le MVP de L4rs0n doit rester simple à exploiter pour une petite
-              équipe, sans sacrifier la clarté de l&apos;architecture. Cette
-              fondation prépare les futurs modules `auth`, `members`,
+              Le MVP de L4rs0n doit rester simple a exploiter pour une petite
+              equipe, sans sacrifier la clarte de l&apos;architecture. Cette
+              fondation prepare les futurs modules `auth`, `members`,
               `activities`, `documents`, `announcements` et `audit`.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -71,7 +71,7 @@ export default function HomePage() {
                 className="inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-white/70 px-5 py-3 text-base font-semibold text-primary-strong transition-colors hover:bg-surface-contrast focus-visible:outline-2 focus-visible:outline-offset-2"
                 href="/espace"
               >
-                Ouvrir la surface adhérent
+                Ouvrir la surface adherent
               </Link>
             </div>
           </div>
@@ -84,9 +84,9 @@ export default function HomePage() {
             </p>
             <ul className="space-y-3 text-base leading-7 text-muted">
               <li>Server Actions pour les mutations same-origin.</li>
-              <li>Route Handlers pour les frontières HTTP explicites.</li>
+              <li>Route Handlers pour les frontieres HTTP explicites.</li>
               <li>Prisma + PostgreSQL comme base de persistance relationnelle.</li>
-              <li>Zod aux frontières d&apos;entrée et env validé.</li>
+              <li>Zod aux frontieres d&apos;entree et env valide.</li>
             </ul>
           </div>
         </aside>

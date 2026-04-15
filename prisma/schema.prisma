@@ -10,11 +10,13 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique(map: "idx_users_email")
   emailVerified Boolean   @default(false) @map("email_verified")
+  memberId      String?   @unique(map: "idx_users_member_id") @map("member_id")
   name          String
   image         String?
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
   accounts      Account[]
+  member        Member?   @relation(fields: [memberId], references: [id], onDelete: SetNull)
   sessions      Session[]
 
   @@map("users")
@@ -66,4 +68,46 @@ model Verification {
 
   @@unique([identifier, value], map: "idx_verifications_identifier_value")
   @@map("verifications")
+}
+
+model Member {
+  id                 String              @id @default(cuid())
+  email              String              @unique(map: "idx_members_email")
+  firstName          String              @map("first_name")
+  lastName           String              @map("last_name")
+  createdAt          DateTime            @default(now()) @map("created_at")
+  updatedAt          DateTime            @updatedAt @map("updated_at")
+  registrationGrants RegistrationGrant[]
+  user               User?
+
+  @@map("members")
+}
+
+model RegistrationGrant {
+  id         String                  @id @default(cuid())
+  memberId   String                  @map("member_id")
+  email      String
+  tokenHash  String                  @unique(map: "idx_registration_grants_token_hash") @map("token_hash")
+  type       RegistrationGrantType
+  status     RegistrationGrantStatus @default(PENDING)
+  expiresAt  DateTime                @map("expires_at")
+  consumedAt DateTime?               @map("consumed_at")
+  createdAt  DateTime                @default(now()) @map("created_at")
+  updatedAt  DateTime                @updatedAt @map("updated_at")
+  member     Member                  @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([email, status], map: "idx_registration_grants_email_status")
+  @@index([memberId], map: "idx_registration_grants_member_id")
+  @@map("registration_grants")
+}
+
+enum RegistrationGrantType {
+  INVITATION
+  ATTACHMENT
+}
+
+enum RegistrationGrantStatus {
+  PENDING
+  CONSUMED
+  REVOKED
 }

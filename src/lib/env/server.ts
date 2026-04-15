@@ -1,31 +1,32 @@
 import { z } from "zod";
 
+const requiredString = (name: string) =>
+  z.string().trim().min(1, `${name} est obligatoire`);
+
 export const serverEnvSchema = z.object({
-  DATABASE_URL: z
-    .string()
-    .min(1, "DATABASE_URL est obligatoire")
-    .default("postgresql://postgres:postgres@localhost:5432/l4rs0n"),
-  BETTER_AUTH_SECRET: z
-    .string()
-    .min(32, "BETTER_AUTH_SECRET doit contenir au moins 32 caractères")
-    .default("change-me-before-production-change-me"),
-  BETTER_AUTH_URL: z
-    .string()
-    .url("BETTER_AUTH_URL doit être une URL valide")
-    .default("http://localhost:3000"),
-  APP_BASE_URL: z
-    .string()
-    .url("APP_BASE_URL doit être une URL valide")
-    .default("http://localhost:3000"),
-  CLUB_NAME: z.string().min(1).default("L4rs0n"),
-  SMTP_FROM: z
-    .string()
-    .email("SMTP_FROM doit être une adresse email valide")
-    .default("noreply@example.com"),
+  DATABASE_URL: requiredString("DATABASE_URL"),
+  BETTER_AUTH_SECRET: requiredString("BETTER_AUTH_SECRET")
+    .min(32, "BETTER_AUTH_SECRET doit contenir au moins 32 caracteres")
+    .refine(
+      (value) => value !== "replace-with-at-least-32-random-characters",
+      "BETTER_AUTH_SECRET doit etre remplace par une vraie valeur secrete",
+    ),
+  BETTER_AUTH_URL: requiredString("BETTER_AUTH_URL").url(
+    "BETTER_AUTH_URL doit etre une URL valide",
+  ),
+  APP_BASE_URL: requiredString("APP_BASE_URL").url(
+    "APP_BASE_URL doit etre une URL valide",
+  ),
+  CLUB_NAME: requiredString("CLUB_NAME"),
+  SMTP_FROM: requiredString("SMTP_FROM").email(
+    "SMTP_FROM doit etre une adresse email valide",
+  ),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
 
-export function loadServerEnv(source: NodeJS.ProcessEnv = process.env): ServerEnv {
+export function loadServerEnv(
+  source: NodeJS.ProcessEnv = process.env,
+): ServerEnv {
   return serverEnvSchema.parse(source);
 }

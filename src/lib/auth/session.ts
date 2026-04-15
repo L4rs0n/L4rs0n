@@ -4,6 +4,7 @@ export const SIGN_IN_PATH = "/sign-in";
 const AUTH_PUBLIC_PATHS = new Set([
   SIGN_IN_PATH,
   "/forgot-password",
+  "/register",
   "/reset-password",
 ]);
 

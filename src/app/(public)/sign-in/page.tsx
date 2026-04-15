@@ -8,6 +8,7 @@ import { loadServerEnv } from "@/lib/env/server";
 
 type SearchParams = Promise<{
   callbackURL?: string | string[];
+  registered?: string | string[];
   reset?: string | string[];
 }>;
 
@@ -38,6 +39,7 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
     >
       <SignInForm
         callbackUrl={callbackUrl}
+        registrationSucceeded={pickString(params.registered) === "success"}
         resetSucceeded={pickString(params.reset) === "success"}
       />
     </AuthPageShell>

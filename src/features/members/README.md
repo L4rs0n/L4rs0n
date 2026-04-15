@@ -1,9 +1,9 @@
 # Members
 
-Responsabilité: porter la fiche membre, les statuts d'adhésion, la conformité et l'éligibilité.
+Responsabilite: porter la fiche membre, sa liaison au compte applicatif et les futurs services de conformite / eligibilite.
 
-Frontières prévues:
-- `services/` pour les cas d'usage métier
-- `policies/` pour l'éligibilité, la visibilité et les autorisations métier
-- `data/` pour Prisma et les requêtes dédiées
-- `components/` pour les composants métier réutilisables
+Frontieres prevues:
+- `services/` pour les cas d'usage membres et de rattachement
+- `policies/` pour les decisions metier partagees
+- `data/` pour les acces persistance specifiques
+- `components/` pour les composants UI lies au domaine

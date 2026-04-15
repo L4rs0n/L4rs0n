@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-04-14T21:57:04.8998298+02:00
-last_updated: 2026-04-15T12:32:01.9774646+02:00
+last_updated: 2026-04-15T15:00:00+02:00
 project: L4rs0n
 project_key: NOKEY
 tracking_system: file-system
@@ -43,9 +43,9 @@ story_location: "_bmad-output/implementation-artifacts"
 
 development_status:
   epic-1: in-progress
-  1-1-initialiser-le-socle-applicatif-du-club: review
+  1-1-initialiser-le-socle-applicatif-du-club: done
   1-2-authentifier-un-utilisateur-par-email-et-mot-de-passe: review
-  1-3-creer-un-compte-via-invitation-ou-rattachement-valide: backlog
+  1-3-creer-un-compte-via-invitation-ou-rattachement-valide: review
   1-4-appliquer-les-roles-et-afficher-une-surface-adaptee: backlog
   1-5-gerer-le-cycle-de-vie-administratif-dun-compte: backlog
   epic-1-retrospective: optional

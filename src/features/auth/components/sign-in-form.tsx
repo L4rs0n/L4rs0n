@@ -10,11 +10,13 @@ import { resolvePostAuthRedirect } from "@/lib/auth/session";
 
 type SignInFormProps = {
   callbackUrl?: string;
+  registrationSucceeded?: boolean;
   resetSucceeded?: boolean;
 };
 
 export function SignInForm({
   callbackUrl,
+  registrationSucceeded = false,
   resetSucceeded = false,
 }: SignInFormProps) {
   const router = useRouter();
@@ -83,9 +85,25 @@ export function SignInForm({
             </p>
           ) : null}
 
+          {registrationSucceeded ? (
+            <p
+              className="mt-4 rounded-[var(--radius-card)] bg-accent-soft px-4 py-3 text-sm font-medium text-primary-strong"
+              role="status"
+            >
+              Votre acces est cree. Vous pouvez maintenant ouvrir votre session.
+            </p>
+          ) : null}
+
           {callbackUrl ? (
             <p className="mt-4 rounded-[var(--radius-card)] bg-white/70 px-4 py-3 text-sm text-muted">
               Une fois connecte, vous serez renvoye vers la surface demandee.
+            </p>
+          ) : null}
+
+          {!callbackUrl && !registrationSucceeded ? (
+            <p className="mt-4 rounded-[var(--radius-card)] bg-white/70 px-4 py-3 text-sm text-muted">
+              Vous avez recu un lien d&apos;activation du club ? Ouvrez directement
+              ce lien pour creer votre acces.
             </p>
           ) : null}
         </div>

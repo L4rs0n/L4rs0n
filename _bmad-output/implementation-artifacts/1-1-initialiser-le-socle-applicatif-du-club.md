@@ -1,6 +1,6 @@
 ﻿# Story 1.1: Initialiser le socle applicatif du club
 
-Status: review
+Status: done
 
 ## Story
 
@@ -45,6 +45,13 @@ so that les stories suivantes s'appuient sur une base cohérente avec l'architec
 - [x] Documenter les conventions de base pour éviter les dérives d'implémentation dès la story 1.2. (AC: 1, 2, 3)
   - [x] Mettre à jour le `README.md` avec les commandes de démarrage et les choix structurants du socle.
   - [x] Ajouter une documentation locale légère dans les domaines réellement introduits, conformément à l'architecture.
+
+### Review Findings
+
+- [x] [Review][Patch] La validation Zod des variables critiques masque les erreurs de configuration avec des valeurs par défaut non sûres [`src/lib/env/server.ts:3`]
+- [x] [Review][Patch] La configuration Prisma CLI ne suit pas la convention `.env.local` documentée et peut viser une mauvaise base [`prisma.config.ts:1`]
+- [x] [Review][Patch] La fondation typographique demandée n'est pas réellement chargée, seules des polices de repli sont déclarées [`src/app/layout.tsx:1`]
+- [x] [Review][Patch] La surface publique n'est pas segmentée sous `src/app/(public)` malgré la structure cible annoncée [`src/app/page.tsx:1`]
 
 ## Dev Notes
 

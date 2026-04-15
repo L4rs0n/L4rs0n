@@ -18,10 +18,12 @@
   --shadow-soft: 0 24px 60px rgba(11, 39, 64, 0.08);
   --radius-card: 1.125rem;
   --radius-panel: 1.5rem;
-  --font-heading-family: "Barlow Condensed", "Arial Narrow", "Roboto Condensed",
+  --font-heading-family: var(--font-barlow-condensed), "Arial Narrow",
+    "Roboto Condensed", sans-serif;
+  --font-body-family: var(--font-source-sans-3), "Segoe UI", system-ui,
     sans-serif;
-  --font-body-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
-  --font-code-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --font-code-family: var(--font-ibm-plex-mono), "SFMono-Regular", Consolas,
+    monospace;
 }
 
 @theme inline {

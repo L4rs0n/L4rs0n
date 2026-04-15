@@ -2,7 +2,7 @@
 title: "UX Design Specification: L4rs0n"
 status: "complete"
 created: "2026-04-08T21:31:10.7998010+02:00"
-updated: "2026-04-08T21:31:10.7998010+02:00"
+updated: "2026-04-15T20:05:00+02:00"
 workflowType: "ux-design"
 stepsCompleted:
   - 1
@@ -39,6 +39,7 @@ date: "2026-04-08T21:31:10.7998010+02:00"
 
 - `ux-color-themes.html`
 - `ux-design-directions.html`
+- `design-artifacts/C-UX-Scenarios/mvp-auth-onboarding-ux-spec.md`
 
 ## 1. Compréhension du produit
 
@@ -458,6 +459,38 @@ Exigences UX :
 - libellés de visibilité compréhensibles ;
 - différenciation claire entre annonce, document et événement.
 
+### 8.5 Parcours 5 : un utilisateur ouvre ou recupere son acces club
+
+Objectif : permettre l'entree dans le produit sans ambiguite, sans signup public libre et avec un niveau de reassurance adapte a un club amateur.
+
+```mermaid
+flowchart TD
+    A[Lien club ou page de connexion] --> B{Compte deja actif ?}
+    B -->|Oui| C[Connexion email mot de passe]
+    B -->|Non| D[Lien d'activation prive]
+    C --> E{Identifiants valides ?}
+    E -->|Oui| F[Session ouverte]
+    E -->|Non| G[Erreur inline + nouvelle tentative]
+    D --> H{Token valide ?}
+    H -->|Oui| I[Creation du compte]
+    H -->|Non| J[Etat invalide expire ou deja consomme]
+    F --> K[Redirection vers la bonne surface]
+    I --> L[Ouverture directe de l'espace adherent]
+    C --> M[Mot de passe oublie]
+    M --> N[Demande de reset]
+    N --> O[Lien de reinitialisation]
+    O --> P[Definition d'un nouveau mot de passe]
+    P --> Q[Retour vers la connexion]
+```
+
+Exigences UX :
+
+- la creation de compte reste strictement controlee par un lien club ;
+- la page de connexion doit expliquer calmement la suite attendue ;
+- les etats invalide, expire, deja utilise ou deja lie restent comprehensibles et non punitifs ;
+- le reset password ne doit jamais exposer si un email existe ou non ;
+- les redirections post-authentification doivent toujours paraitre logiques et immediates.
+
 ## 9. Stratégie composants
 
 ### 9.1 Composants de base attendus du design system
@@ -513,6 +546,30 @@ Exigences UX :
 - hiérarchie par fraîcheur et criticité ;
 - différencie contenu informatif et action attendue.
 
+**Shell auth public**
+
+- hero de contexte reutilisable pour connexion, activation et recuperation ;
+- introduit la page avant le formulaire ;
+- maintient une hierarchie stable entre message de reassurance et action principale.
+
+**Banniere de statut de formulaire**
+
+- supporte information, succes, erreur bloquante et confirmation generique ;
+- doit fonctionner inline dans la page et non uniquement via toast ;
+- harmonise les messages sur connexion, activation et reset.
+
+**Champ verrouille**
+
+- rend visible qu'une donnee est imposee par le club ou par le contexte ;
+- crucial pour l'email d'activation ;
+- doit paraitre intentionnel et non casse.
+
+**Carte de session protegee**
+
+- expose identite, email et expiration de session ;
+- rassure immediatement l'utilisateur authentifie ;
+- sert de fondation aux surfaces `/espace` et `/pilotage`.
+
 ### 9.3 Règles de construction
 
 - les composants métier encapsulent le langage du club ;
@@ -561,6 +618,15 @@ Exigences UX :
 - recherche et filtres restent visibles sur les écrans de liste ;
 - aucun écran critique ne doit afficher "0 résultat" sans aide de reformulation.
 
+### 10.7 Acces, redirections et feedback d'authentification
+
+- un utilisateur deja authentifie ne doit pas rester bloque sur la connexion ou l'activation ;
+- toute surface protegee doit rediriger vers la connexion avec conservation du contexte utile ;
+- apres activation reussie, l'ouverture directe de l'espace adherent est preferable a une etape intermediaire ;
+- apres reset password reussi, le retour vers la connexion avec banniere de succes est le pattern de reference ;
+- les pages publiques d'acces doivent privilegier les messages inline persistants plutot que des toasts ephemeres ;
+- les etats pending doivent desactiver le CTA principal et indiquer clairement la progression pour eviter le double clic.
+
 ## 11. Responsive et accessibilité
 
 ### 11.1 Stratégie responsive
@@ -600,6 +666,15 @@ Exigences UX :
 - éviter les abréviations internes du club sans explication ;
 - rendre la date, le lieu et le type d'activité lisibles d'un coup d'oeil.
 
+### 11.4 Contraintes spécifiques aux pages d'acces
+
+- les formulaires de connexion, activation et reset restent pleinement utilisables a `360px` de large ;
+- sur mobile, l'introduction doit preceder le formulaire sans repousser l'action trop loin sous la ligne de flottaison ;
+- sur desktop, la mise en page peut passer en deux colonnes mais sans etirer excessivement les champs ;
+- les champs email verrouilles doivent rester lisibles et clairement identifies comme non modifiables ;
+- les messages de confirmation generique, notamment sur la recuperation de mot de passe, doivent rester comprehensibles sans reveler d'information sensible ;
+- les surfaces transitoires authentifiees doivent toujours afficher un signe explicite de session active et une sortie de deconnexion facile a trouver.
+
 ## 12. Hypothèses et points à valider
 
 ### 12.1 Hypothèses de travail retenues
@@ -618,6 +693,14 @@ Exigences UX :
 - profondeur du tableau de bord administrateur ;
 - icônes ou labels exacts des statuts membres.
 
+### 12.3 Questions ouvertes issues du slice auth/onboarding
+
+- la surface `/espace` doit-elle devenir un vrai tableau de bord des la story 1.4 ou rester une page de transition courte ;
+- les surfaces `/espace` et `/pilotage` doivent-elles diverger plus franchement des l'arrivee de la logique de roles ;
+- faut-il ajouter un texte d'aide plus explicite autour de l'option "rester connecte" pour les utilisateurs moins a l'aise ;
+- le club a-t-il besoin d'un bloc de reassurance plus fort quand un lien d'activation est expire ou deja consomme ;
+- le premier ecran authentifie doit-il faire remonter les annonces urgentes avant les raccourcis de navigation.
+
 ## 13. Résumé d'exécution
 
 La UX de L4rs0n doit donner l'impression d'un club bien organisé plutôt que d'un logiciel abstrait. La réussite du design dépend surtout de trois choses :
@@ -631,4 +714,5 @@ Cette spécification est prête à guider :
 - la génération de wireframes ;
 - la conception de prototypes ;
 - l'implémentation frontend ;
-- le découpage en stories UI.
+- le découpage en stories UI ;
+- la stabilisation des flux d'acces et d'onboarding deja engages dans le MVP.

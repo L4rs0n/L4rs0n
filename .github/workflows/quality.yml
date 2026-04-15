@@ -10,6 +10,14 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    env:
+      APP_BASE_URL: http://127.0.0.1:3000
+      NEXT_PUBLIC_APP_NAME: L4rs0n
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/l4rs0n
+      BETTER_AUTH_URL: http://127.0.0.1:3000
+      BETTER_AUTH_SECRET: ci-secret-value-with-at-least-32-characters
+      SMTP_FROM: noreply@example.com
+      CLUB_NAME: L4rs0n
 
     steps:
       - name: Checkout
