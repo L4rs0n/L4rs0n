@@ -10,7 +10,8 @@
     "test": "node --test --test-isolation=none --experimental-strip-types --experimental-transform-types \"src/**/*.spec.ts\"",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",
-    "prisma:validate": "prisma validate"
+    "prisma:validate": "prisma validate",
+    "test:integration": "node --test --experimental-strip-types --experimental-transform-types tests/rbac.integration.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.7.0",
@@ -21,6 +22,7 @@
     "pg": "^8.20.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "server-only": "^0.0.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {

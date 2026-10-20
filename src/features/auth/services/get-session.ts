@@ -5,6 +5,7 @@ import { auth } from "@/features/auth/auth";
 export async function getSession() {
   return auth.api.getSession({
     headers: await headers(),
+    query: { disableCookieCache: true },
   });
 }
 

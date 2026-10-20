@@ -29,7 +29,6 @@ export const auth = betterAuth({
     additionalFields: {
       memberId: {
         type: "string",
-        fieldName: "member_id",
         input: true,
         required: false,
         returned: false,

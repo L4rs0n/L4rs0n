@@ -10,10 +10,25 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: l4rs0n
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     env:
       APP_BASE_URL: http://127.0.0.1:3000
       NEXT_PUBLIC_APP_NAME: L4rs0n
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/l4rs0n
+      TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/l4rs0n
       BETTER_AUTH_URL: http://127.0.0.1:3000
       BETTER_AUTH_SECRET: ci-secret-value-with-at-least-32-characters
       SMTP_FROM: noreply@example.com
@@ -35,6 +50,15 @@ jobs:
       - name: Generate Prisma client
         run: npm run prisma:generate
 
+      - name: Validate Prisma schema
+        run: npm run prisma:validate
+
+      - name: Apply migrations to test database
+        run: npx prisma migrate deploy
+
+      - name: Unit tests
+        run: npm test
+
       - name: Lint
         run: npm run lint
 
@@ -43,3 +67,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: RBAC integration tests (database, HTTP and Server Actions)
+        run: npm run test:integration

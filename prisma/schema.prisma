@@ -15,6 +15,7 @@ model User {
   image         String?
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
+  roles         Role[]    @default([MEMBER])
   accounts      Account[]
   member        Member?   @relation(fields: [memberId], references: [id], onDelete: SetNull)
   sessions      Session[]
@@ -23,15 +24,16 @@ model User {
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  userId    String   @map("user_id")
-  expiresAt DateTime @map("expires_at")
-  token     String   @unique(map: "idx_sessions_token")
-  ipAddress String?  @map("ip_address")
-  userAgent String?  @map("user_agent")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  expiresAt  DateTime @map("expires_at")
+  activeRole Role?    @map("active_role")
+  token      String   @unique(map: "idx_sessions_token")
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId], map: "idx_sessions_user_id")
   @@map("sessions")
@@ -110,4 +112,13 @@ enum RegistrationGrantStatus {
   PENDING
   CONSUMED
   REVOKED
+}
+
+// Fixed MVP catalogue from the PRD. Permissions live in server policies.
+enum Role {
+  MEMBER
+  ADMIN
+  TREASURER
+  EVENT_MANAGER
+  COACH
 }

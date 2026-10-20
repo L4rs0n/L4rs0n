@@ -1,58 +1,17 @@
-﻿import { PageShell } from "@/components/layout/page-shell";
+import { requireAccess } from "@/features/auth/services/access";
+import { PageShell } from "@/components/layout/page-shell";
 import { SignOutButton } from "@/features/auth/components/sign-out-button";
-import { requireAuth } from "@/features/auth/services/require-auth";
+import { RoleNavigation } from "@/features/auth/components/role-navigation";
 
 export default async function AdminDashboardPage() {
-  const session = await requireAuth("/pilotage");
-
+  const context = await requireAccess("pilotage:access", "/pilotage");
   return (
-    <PageShell
-      eyebrow="Surface responsable"
-      title="Session restauree pour le pilotage administratif"
-      description="La surface responsable n&apos;est plus un simple placeholder public: elle exige maintenant une session authentifiee avant affichage."
-    >
-      <section className="grid gap-4 md:grid-cols-2">
-        <article className="surface-card rounded-[var(--radius-card)] p-6">
-          <h2 className="text-3xl text-primary-strong">Ce qui est deja verrouille</h2>
-          <p className="mt-3 text-base leading-7 text-muted">
-            Le chargement de session s&apos;effectue cote serveur avant toute
-            exposition de la surface. La logique fine de role actif viendra
-            ensuite.
-          </p>
-          <dl className="mt-6 space-y-3 text-base leading-7 text-muted">
-            <div>
-              <dt className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
-                Utilisateur
-              </dt>
-              <dd className="text-primary-strong">{session.user.email}</dd>
-            </div>
-            <div>
-              <dt className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
-                Session
-              </dt>
-              <dd className="text-primary-strong">
-                Expire le{" "}
-                {new Intl.DateTimeFormat("fr-FR", {
-                  dateStyle: "medium",
-                  timeStyle: "short",
-                }).format(new Date(session.session.expiresAt))}
-              </dd>
-            </div>
-          </dl>
-        </article>
-        <article className="surface-card rounded-[var(--radius-card)] p-6">
-          <h2 className="text-3xl text-primary-strong">
-            Ce qui reste volontairement ouvert
-          </h2>
-          <p className="mt-3 text-base leading-7 text-muted">
-            Aucun workflow metier n&apos;est encore actif ici. La story 1.2 pose
-            l&apos;authentification, pas encore la matrice RBAC complete ni les
-            pages d&apos;administration profondes.
-          </p>
-          <div className="mt-6">
-            <SignOutButton />
-          </div>
-        </article>
+    <PageShell eyebrow="Surface responsable" title="Pilotage du club" description="Retrouvez les outils correspondant à votre rôle actif de responsable.">
+      <RoleNavigation context={context} />
+      <section className="surface-card rounded-[var(--radius-card)] p-6">
+        <h2 className="text-3xl">Bienvenue, {context.user.name}</h2>
+        <p className="my-4">{context.user.email}</p>
+        <SignOutButton />
       </section>
     </PageShell>
   );

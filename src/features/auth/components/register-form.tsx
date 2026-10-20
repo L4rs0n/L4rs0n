@@ -7,7 +7,7 @@ import { useState, useTransition } from "react";
 import { authClient } from "@/features/auth/auth-client";
 import { getFieldErrors, registerSchema } from "@/features/auth/auth-schema";
 import { DEFAULT_AUTHENTICATED_PATH } from "@/lib/auth/session";
-import { REGISTRATION_TOKEN_HEADER } from "@/features/members/services/registration-grants.shared";
+import { REGISTRATION_TOKEN_HEADER } from "@/features/members/services/registration-header";
 
 type RegisterFormProps = {
   email: string;

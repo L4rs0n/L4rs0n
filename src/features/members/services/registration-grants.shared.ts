@@ -2,7 +2,7 @@ import { createHash, randomBytes } from "node:crypto";
 
 const REGISTRATION_TOKEN_BYTES = 32;
 
-export const REGISTRATION_TOKEN_HEADER = "x-l4rs0n-registration-token";
+export { REGISTRATION_TOKEN_HEADER } from "./registration-header.ts";
 
 export function createRegistrationToken() {
   return randomBytes(REGISTRATION_TOKEN_BYTES).toString("hex");

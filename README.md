@@ -59,3 +59,7 @@ prisma/         # schéma Prisma et migrations
 - En environnement local sans fournisseur email réel, les URLs de reset password sont journalisées côté serveur pour faciliter le test manuel du flux.
 - La story 1.3 ajoute `/register`, mais ce parcours ne fonctionne que si une `Member` et une `RegistrationGrant` valides existent deja cote club.
 - Tant que l'UI d'administration correspondante n'existe pas encore, ces enregistrements peuvent etre prepares via Prisma Studio, SQL ou un seed interne de developpement.
+
+## Autorisation
+
+La story 1.4 ajoute les rôles multiples, le rôle actif par session, les guards serveur et l'attribution réservée aux administrateurs. Voir [la matrice, la migration et les commandes de validation](docs/authorization.md).
